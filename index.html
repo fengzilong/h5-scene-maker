@@ -1,0 +1,26 @@
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+		<title>demo</title>
+	</head>
+	<body>
+		<ui-stage>
+			<ui-element-wrapper>
+				<div class="" style="width: 500px;height: 500px;border-radius: 50%;background-color: #DDD;">
+					
+				</div>
+			</ui-element-wrapper>
+		</ui-stage>
+		
+		<script type="riot/tag" src="./components/ui-stage/ui-stage.tag"></script>
+		<script type="riot/tag" src="./components/ui-element-wrapper/ui-element-wrapper.tag"></script>
+		<script type="riot/tag" src="./components/ui-element/ui-element.tag"></script>
+		<script type="text/javascript" src="./riot+compiler.min.js"></script>
+		<script type="text/javascript" src="./index.js"></script>
+		<script type="text/javascript">
+			riot.compile(function(){
+				riot.mount('*');
+			});
+		</script>
+	</body>
+</html>
