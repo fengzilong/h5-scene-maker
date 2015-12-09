@@ -1,26 +1,21 @@
-<html>
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
 	<head>
-		<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+		<meta charset="UTF-8">
+		<meta name="keywords" content="" />
+		<meta name="description" content="" />
+		<meta content="telephone=no" name="format-detection" />
+		<meta content="email=no" name="format-detection" />
 		<title>demo</title>
+		<script type="text/javascript">
+			!function(e){function t(){e.rem=d.getBoundingClientRect().width/16,d.style.fontSize=e.rem+"px"}var i,n,a=e.navigator.appVersion.match(/iphone/gi)?e.devicePixelRatio:1,m=1/a,d=document.documentElement,o=document.createElement("meta");e.dpr=a,e.addEventListener("resize",function(){clearTimeout(i),i=setTimeout(t,300)},!1),e.addEventListener("pageshow",function(e){e.persisted&&(clearTimeout(i),i=setTimeout(t,300))},!1),d.setAttribute("data-dpr",a),o.setAttribute("name","viewport"),o.setAttribute("content","initial-scale="+m+", maximum-scale="+m+", minimum-scale="+m+", user-scalable=no"),d.firstElementChild?d.firstElementChild.appendChild(o):(n=document.createElement("div"),n.appendChild(o),document.write(n.innerHTML)),t()}(window);
+		</script>
+		<link rel="stylesheet" href="./build/bundle.css" />
 	</head>
 	<body>
-		<ui-stage>
-			<ui-element-wrapper>
-				<div class="" style="width: 500px;height: 500px;border-radius: 50%;background-color: #DDD;">
-					
-				</div>
-			</ui-element-wrapper>
-		</ui-stage>
+		<scene-loading></scene-loading>
 		
-		<script type="riot/tag" src="./components/ui-stage/ui-stage.tag"></script>
-		<script type="riot/tag" src="./components/ui-element-wrapper/ui-element-wrapper.tag"></script>
-		<script type="riot/tag" src="./components/ui-element/ui-element.tag"></script>
-		<script type="text/javascript" src="./riot+compiler.min.js"></script>
-		<script type="text/javascript" src="./index.js"></script>
-		<script type="text/javascript">
-			riot.compile(function(){
-				riot.mount('*');
-			});
-		</script>
+		<script type="text/javascript" src="./vendor/zepto.js"></script>
+		<script type="text/javascript" src="./build/bundle.js"></script>
 	</body>
 </html>

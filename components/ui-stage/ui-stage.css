@@ -1,0 +1,7 @@
+ui-stage {
+    display: none;
+}
+
+ui-stage.active {
+    display: block;
+}
