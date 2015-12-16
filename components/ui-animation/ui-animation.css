@@ -37,6 +37,16 @@ ui-animation {
     animation-duration: 2s;
 }
 
+/* Delay */
+
+:local(.delay_1000) {
+    animation-delay: 1s;
+}
+
+:local(.delay_2000) {
+    animation-delay: 2s;
+}
+
 /* Count */
 :local(.count_1) {
 
