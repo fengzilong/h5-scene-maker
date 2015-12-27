@@ -1,50 +1,59 @@
+ui-animation {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
 ui-stage.active ui-animation {
-    display: block;
-    -webkit-animation-play-state: running;
-    animation-play-state: running;
+	display: block;
+	-webkit-animation-play-state: running;
+	animation-play-state: running;
 }
 
 ui-animation {
-    display: none;
-    -webkit-animation-play-state: paused;
-    animation-play-state: paused;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
+	display: none;
+	-webkit-animation-play-state: paused;
+	animation-play-state: paused;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
 }
 
 /* Name */
 
 :local(.fadeIn) {
-    -webkit-animation-name: fadeIn;
-    animation-name: fadeIn;
+	-webkit-animation-name: fadeIn;
+	animation-name: fadeIn;
 }
 
 :local(.fadeOut) {
-    -webkit-animation-name: fadeOut;
-    animation-name: fadeOut;
-
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
+	-webkit-animation-name: fadeOut;
+	animation-name: fadeOut;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
 }
 
 /* Duration */
 :local(.duration_1000) {
-    -webkit-animation-duration: 1s;
-    animation-duration: 1s;
+	-webkit-animation-duration: 1s;
+	animation-duration: 1s;
 }
 :local(.duration_2000) {
-    -webkit-animation-duration: 2s;
-    animation-duration: 2s;
+	-webkit-animation-duration: 2s;
+	animation-duration: 2s;
 }
 
 /* Delay */
 
 :local(.delay_1000) {
-    animation-delay: 1s;
+	animation-delay: 1s;
 }
 
 :local(.delay_2000) {
-    animation-delay: 2s;
+	animation-delay: 2s;
 }
 
 /* Count */

@@ -20,7 +20,8 @@ module.exports = {
 			css: path.resolve( cwd, 'css' ),
 			image: path.resolve( cwd, 'images' ),
 			scene: path.resolve( cwd, 'scenes' ),
-			lib: path.resolve( cwd, 'lib' )
+			lib: path.resolve( cwd, 'lib' ),
+			mixin: path.resolve( cwd, 'mixins' )
 		},
 		extensions: [
 			'', '.js', '.tag', '.css'

@@ -1,16 +1,16 @@
 :local(.circle) {
-    border-radius: 50%;
-    background-color: #DDD;
+	border-radius: 50%;
+	background-color: #DDD;
 }
 
 :local(.circle_small) {
-    composes: circle;
-    width: 6rem;
-    height: 6rem;
+	composes: circle;
+	width: 6rem;
+	height: 6rem;
 }
 
 :local(.circle_large) {
-    composes: circle;
-    width: 9rem;
-    height: 9rem;
+	composes: circle;
+	width: 9rem;
+	height: 9rem;
 }
