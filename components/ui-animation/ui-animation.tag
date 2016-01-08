@@ -1,4 +1,5 @@
-require('lib/animate.css');
+require('lib/animo.js')
+require('lib/animo.css')
 
 <ui-animation>
 	<yield />
@@ -15,52 +16,10 @@ require('lib/animate.css');
 		this.animationDuration = this.opts.duration;
 		this.animationCount = this.opts.count;
 
-		function durationStyle( duration ){
-			var durationCls = 'duration_' + duration;
-			var styles = `
-				.` + durationCls + ` {
-					animation-duration: ` + parseFloat( duration ) / 1000 + `s;
-					-webkit-animation-duration: ` + parseFloat( duration ) / 1000 + `s;
-				}
-			`;
-
-			injectStyle( styles );
-
-			return durationCls;
-		}
-
-		function delayStyle( delay ){
-			var delayCls = 'delay_' + delay;
-
-			var styles = `
-				.` + delayCls + ` {
-					animation-delay: ` + parseFloat( delay ) / 1000 + `s;
-					-webkit-animation-delay: ` + parseFloat( delay ) / 1000 + `s;
-				}
-			`;
-
-			injectStyle( styles );
-
-			return delayCls;
-		}
-
-		function countStyle( count ){
-			var countCls = 'count_' + count;
-
-			var styles = `
-				.` + countCls + ` {
-					animation-iteration-count: ` + count + `;
-					-webkit-animation-iteration-count: ` + count + `;
-				}
-			`;
-
-			injectStyle( styles );
-
-			return countCls;
-		}
-
 		this.on('mount', function(){
-			$( this.root ).animo({
+			var $root = $( this.root );
+
+			$root.animo({
 				animation: ['tada', 'bounceOutLeft'],
 				duration: 1
 			});

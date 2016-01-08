@@ -1,15 +1,15 @@
 var ExtractTextPlugin  = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin  = require('html-webpack-plugin');
-var path = require('path');
 var webpack = require('webpack');
-var cwd = process.cwd();
+var path    = require('path');
+var cwd     = process.cwd();
 
 require('es6-promise').polyfill();
 
 var webpackConfig = {
 	devtool: 'source-map',
 	cache: false,
-	entry: [ 'lib/animo.js', 'lib/animo.css', 'mixin/unit.js', './index.js' ],
+	entry: [ 'mixin/unit.js', './index.js' ],
 	output: {
 		path: path.resolve( cwd, 'dist' ),
 		filename: 'bundle.js'
@@ -46,6 +46,9 @@ var webpackConfig = {
 	},
 	plugins: [
 		new ExtractTextPlugin( 'bundle.css'),
+		new webpack.DefinePlugin({
+			DEV: true
+		}),
 		new webpack.ProvidePlugin({
 			riot: 'riot',
 			Promise: 'lib/promise-polyfill',
