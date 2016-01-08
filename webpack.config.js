@@ -6,10 +6,10 @@ var cwd = process.cwd();
 
 require('es6-promise').polyfill();
 
-module.exports = {
+var webpackConfig = {
 	devtool: 'source-map',
 	cache: false,
-	entry: [ './index.js' ],
+	entry: [ 'lib/animo.js', 'lib/animo.css', 'mixin/unit.js', './index.js' ],
 	output: {
 		path: path.resolve( cwd, 'dist' ),
 		filename: 'bundle.js'
@@ -48,7 +48,10 @@ module.exports = {
 		new ExtractTextPlugin( 'bundle.css'),
 		new webpack.ProvidePlugin({
 			riot: 'riot',
-			Promise: 'lib/promise-polyfill'
+			Promise: 'lib/promise-polyfill',
+			animo: 'lib/animo.css'
 		})
 	]
 };
+
+module.exports = webpackConfig;

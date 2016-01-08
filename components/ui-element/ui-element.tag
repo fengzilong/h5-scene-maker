@@ -1,11 +1,17 @@
 <ui-element>
-	<yield />
+	<div class="{ styles.center }">
+		<div name="offset">
+			<yield />
+		</div>
+	</div>
 
 	<script>
 		var self = this;
+		this.styles = require('./ui-element.css');
 
 		// TODO: scale属性
 		// TODO: 单位转换
+
 		this.tagName = 'ui-element';
 		this.x = this.opts.x;
 		this.y = this.opts.y;
@@ -18,7 +24,7 @@
 				return;
 			}
 
-			var style = self.root.style;
+			var style = self.offset.style;
 
 			if( typeof x !== 'undefined'){
 				style[ 'margin-top' ] = y;
