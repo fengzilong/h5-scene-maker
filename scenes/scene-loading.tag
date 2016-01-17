@@ -17,7 +17,6 @@ require('ui/ui-image');
 			</ui-element>
 		</ui-animation>
 
-
 		<ui-animation>
 			<ui-image image="{ parent.parent.img }" steps="26"></ui-image>
 		</ui-animation>
@@ -26,8 +25,6 @@ require('ui/ui-image');
 	<script>
 		this.styles = require('./scene-loading.css');
 		this.img = require('image/sheep.png');
-
-		console.log( 'this.img', this.img );
 
 		this.on('mount', function(){
 
