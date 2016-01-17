@@ -34,7 +34,7 @@
 /******/ 	__webpack_require__.c = installedModules;
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "http://localhost:8080";
+/******/ 	__webpack_require__.p = "//demo.com:8080";
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
@@ -45,38 +45,74 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(1);
-	module.exports = __webpack_require__(3);
+	__webpack_require__(2);
+	module.exports = __webpack_require__(4);
 
 
 /***/ },
 /* 1 */
+/***/ function(module, exports) {
+
+	var SHAKE_THRESHOLD = 4000;
+	var last_update = 0;
+	var x, y, z, last_x = 0,
+		last_y = 0,
+		last_z = 0;
+	
+	function deviceMotionHandler(eventData) {
+		var acceleration = eventData.accelerationIncludingGravity;
+		var curTime = new Date().getTime();
+		if ((curTime - last_update) > 10) {
+			var diffTime = curTime - last_update;
+			last_update = curTime;
+			x = acceleration.x;
+			y = acceleration.y;
+			z = acceleration.z;
+			var speed = Math.abs(x + y + z - last_x - last_y - last_z) / diffTime * 10000;
+	
+			if (speed > SHAKE_THRESHOLD) {
+				location.reload();
+			}
+			last_x = x;
+			last_y = y;
+			last_z = z;
+		}
+	}
+	if (window.DeviceMotionEvent) {
+		window.addEventListener('devicemotion', deviceMotionHandler, false);
+	}
+
+
+/***/ },
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(riot) {var R_PX = /^\d+px$/;
 	var R_NUM = /^\d+$/;
+	var DIVIDE = 40;
 	
 	riot.mixin('unit', {
 		unit: function( u ) {
-			u = u.trim();
+			u = ( u + '' ).trim();
 			var num = u;
 	
 			if( R_PX.test( u ) ){
 				var matched = u.match(/\d*/);
 				num = matched[0] ? matched[0] : 0;
 				num = parseFloat( num );
-				num = num / 16 + 'rem';
+				num = num / DIVIDE;
 			} else if( R_NUM.test( u ) ){
-				
+				num = num / DIVIDE;
 			}
 	
 			return num;
 		}
 	});
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 2 */
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* Riot v2.3.11, @license MIT, (c) 2015 Muut Inc. + contributors */
@@ -2329,82 +2365,80 @@
 
 
 /***/ },
-/* 3 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(riot) {__webpack_require__(4);
-	__webpack_require__(8);
+	/* WEBPACK VAR INJECTION */(function(riot) {__webpack_require__(5);
+	__webpack_require__(9);
 	
 	riot.mount('*');
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 4 */
+/* 5 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 5 */,
 /* 6 */,
 /* 7 */,
-/* 8 */
+/* 8 */,
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(riot) {__webpack_require__(9);
-	__webpack_require__(12);
-	__webpack_require__(19);
-	__webpack_require__(22);
+	/* WEBPACK VAR INJECTION */(function(riot) {__webpack_require__(10);
+	__webpack_require__(13);
+	__webpack_require__(20);
+	__webpack_require__(23);
 	
-	riot.tag2('scene-loading', '<ui-stage class="active"> <ui-animation name="fadeIn" delay="2000" duration="2000" count="1"> <ui-element x="-1rem" y="-1rem"> <div class="{parent.parent.parent.styles.circle_large}"></div> </ui-element> </ui-animation> <ui-animation name="fadeIn" delay="1000" duration="2000" count="1"> <ui-element x="6rem" y="6rem"> <div class="{parent.parent.parent.styles.circle_small}"></div> </ui-element> </ui-animation> <ui-animation> <ui-image image="{img}"> </ui-image> </ui-animation> </ui-stage>', '', '', function(opts) {
-			this.styles = __webpack_require__(23);
-			this.img = __webpack_require__(25);
-	
-			console.log( 'this.img', this.img );
+	riot.tag2('scene-loading', '<ui-stage class="active"> <ui-animation> <ui-element x="-1rem" y="-1rem"> <div class="{parent.parent.parent.styles.circle_large}"></div> </ui-element> </ui-animation> <ui-animation> <ui-element x="6rem" y="6rem"> <div class="{parent.parent.parent.styles.circle_small}"></div> </ui-element> </ui-animation> <ui-animation> <ui-image image="{parent.parent.img}" steps="26"></ui-image> </ui-animation> </ui-stage>', '', '', function(opts) {
+			this.styles = __webpack_require__(28);
+			this.img = __webpack_require__(30);
 	
 			this.on('mount', function(){
 	
 			});
 	}, '{ }');
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(riot) {riot.tag2('ui-stage', '<yield></yield>', '', '', function(opts) {
 			// TODO: animateDone事件
-			var styles = __webpack_require__(10);
+			var styles = __webpack_require__(11);
 	
 			this.tagName = 'ui-stage';
 	
 			this.on('mount', function(){
-				console.log( 'ui-stage mounted' );
+	
 			});
 	});
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 11 */,
-/* 12 */
+/* 12 */,
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(riot) {__webpack_require__(13)
-	__webpack_require__(14)
+	/* WEBPACK VAR INJECTION */(function(riot) {__webpack_require__(14)
+	__webpack_require__(15)
 	
 	riot.tag2('ui-animation', '<yield></yield>', '', '', function(opts) {
 			// TODO: 动画序列属性，数组，由delay控制动画顺序
 			// 内置一些基础动画，如fadeIn，fadeOut，zoomIn，zoomOut
-			var styles = __webpack_require__(16);
-			var injectStyle = __webpack_require__(18);
+			var styles = __webpack_require__(17);
+			var injectStyle = __webpack_require__(19);
 	
 			this.tagName = 'ui-animation';
 			this.animationName = this.opts.name;
@@ -2416,16 +2450,24 @@
 				var $root = $( this.root );
 	
 				$root.animo({
-					animation: ['tada', 'bounceOutLeft'],
-					duration: 1
+					animation: ['flipInX'],
+					duration: 1,
+					keep: true
+				}, function(){
+					$root.animo({
+						animation: ['tada', 'bounceOutLeft'],
+						duration: 1
+					}, function(){
+	
+					});
 				});
 			});
 	});
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports) {
 
 	;(function ( $, window, document, undefined ) {
@@ -2450,7 +2492,7 @@
 	    };
 	
 	    // Browser prefixes for CSS
-	    this.prefixes = ["", "-moz-", "-o-animation-", "-webkit-"];
+	    this.prefixes = ["", "-webkit-"];
 	
 	    // Cache the element
 	    this.element = $(element);
@@ -2561,20 +2603,13 @@
 	
 	      this.element.data("animo", this.queue[0]);
 	
-	      var ai = this.prefixes.length;
-	
-	      // Add the options for each prefix
-	      while(ai--) {
-	
-	      	this.element.css(this.prefixes[ai]+"animation-duration", this.options.duration+"s");
-	
-	      	this.element.css(this.prefixes[ai]+"animation-delay", this.options.delay+"s");
-	
-	      	this.element.css(this.prefixes[ai]+"animation-iteration-count", this.options.iterate);
-	
-	      	this.element.css(this.prefixes[ai]+"animation-timing-function", this.options.timing);
-	
-	      }
+			// Modified
+			this.element.css({
+				"-webkit-animation-duration": this.options.duration+"s",
+				"-webkit-animation-delay": this.options.delay+"s",
+				"-webkit-animation-iteration-count": this.options.iterate,
+				"-webkit-animation-timing-function": this.options.timing
+			});
 	
 	      var $me = this, _cb = callback;
 	
@@ -2603,33 +2638,22 @@
 	    },
 	
 	    cleanse: function() {
+			this.element.removeClass('animated');
 	
-	    	this.element.removeClass('animated');
+			this.element.removeClass(this.queue[0]);
 	
-	  		this.element.removeClass(this.queue[0]);
+			this.element.removeClass(this.element.data("animo"));
 	
-	      this.element.removeClass(this.element.data("animo"));
-	
-	  		var ai = this.prefixes.length;
-	
-	  		while(ai--) {
-	
-	      	this.element.css(this.prefixes[ai]+"animation-duration", "");
-	
-	      	this.element.css(this.prefixes[ai]+"animation-delay", "");
-	
-	      	this.element.css(this.prefixes[ai]+"animation-iteration-count", "");
-	
-	      	this.element.css(this.prefixes[ai]+"animation-timing-function", "");
-	
-	        this.element.css(this.prefixes[ai]+"transition", "");
-	
-	        this.element.css(this.prefixes[ai]+"transform", "");
-	
-	        this.element.css(this.prefixes[ai]+"filter", "");
-	
-	      }
-	    },
+			this.element.css({
+				"-webkit-animation-duration": "",
+				"-webkit-animation-delay": "",
+				"-webkit-animation-iteration-count": "",
+				"-webkit-animation-timing-function": "",
+				"-webkit-transition": "",
+				"-webkit-transform": "",
+				"-webkit-filter": ""
+			});
+		},
 	
 	    _blur: function(callback) {
 	
@@ -2739,10 +2763,9 @@
 	
 	      var $me = this;
 	
-	      var binding = type.toLowerCase()+" webkit"+type+" o"+type+" MS"+type;
+	      var binding = "webkit"+type;
 	
 	      this.element.bind(binding, function() {
-	
 	        $me.element.unbind(binding);
 	
 	        if(typeof todo == "function") {
@@ -2773,22 +2796,21 @@
 
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 15 */,
-/* 16 */
+/* 16 */,
+/* 17 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
-	module.exports = {"fadeIn":"ui-animation_fadeIn_mPcrB","fadeOut":"ui-animation_fadeOut_1-LXX","duration_1000":"ui-animation_duration_1000_fnrL1","duration_2000":"ui-animation_duration_2000_1H_vI","delay_1000":"ui-animation_delay_1000_1i-lz","delay_2000":"ui-animation_delay_2000_21vXN","count_1":"ui-animation_count_1_3NKPh","count_inifite":"ui-animation_count_inifite_1YSwJ"};
 
 /***/ },
-/* 17 */,
-/* 18 */
+/* 18 */,
+/* 19 */
 /***/ function(module, exports) {
 
 	module.exports = function( textContent ){
@@ -2800,12 +2822,12 @@
 
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(riot) {riot.tag2('ui-element', '<div class="{styles.center}"> <div name="offset"> <yield></yield> </div> </div>', '', '', function(opts) {
+	/* WEBPACK VAR INJECTION */(function(riot) {riot.tag2('ui-element', '<div class="{styles.center}" name="offset"> <yield></yield> </div>', '', '', function(opts) {
 			var self = this;
-			this.styles = __webpack_require__(20);
+			this.styles = __webpack_require__(21);
 	
 			// TODO: scale属性
 			// TODO: 单位转换
@@ -2835,24 +2857,26 @@
 	
 			this.on('mount', function(){
 				locate();
+				var $root = $(this.root)
+	
 			});
 	}, '{ }');
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 	module.exports = {"center":"ui-element_center_2Anjp"};
 
 /***/ },
-/* 21 */,
-/* 22 */
+/* 22 */,
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(riot) {riot.tag2('ui-image', '', '', '', function(opts) {
+	/* WEBPACK VAR INJECTION */(function(riot) {riot.tag2('ui-image', '<img if="{steps === 1}" riot-src="{image.src || \'about:blank;\'}" riot-style="width: {unit( image.width )};height: {unit( image.height )};"> <div if="{steps > 1}" riot-style="{wrapperStyle}"> <img riot-src="{image.src || \'about:blank;\'}" riot-style="{imgStyle}"> </div>', '', '', function(opts) {
 			/*
 			 * image: object, contains src && width && height, use image-loader
 			 * direction: string, '-' 或 '|'
@@ -2860,29 +2884,105 @@
 			 * duration: number, defualt 1 if steps is valid
 			 */
 	
+			var injectStyle = __webpack_require__(19);
+	
+			this.mixin('unit');
 			this.tagName = 'ui-image';
+			this.styles = __webpack_require__(24);
+			this.wrapperStyle = '';
+			this.imgStyle = '';
 	
 			this.on('update', function(){
 				// 当opts变化时，更新css
-				// 如果steps <= 1, 则当做静态图像处理，否则当做sprite处理
-			});
-	});
+				// 如果steps <= 1, 当做静态图像处理，否则当做sprite处理
+				this.image = this.opts.image || {};
+				this.direction = this.opts.direction || '-';
+				this.duration = this.opts.duration || '1';
+				if( typeof this.opts.steps !== 'undefined' ){
+					this.steps = parseInt( this.opts.steps ) || 1;
+				} else {
+					this.steps = 1;
+				}
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+				this.wrapperStyle = '';
+				if( this.direction === '-' ) {
+					this.wrapperStyle += 'width: ' + this.unit( this.image.width ) / this.steps + 'rem;';
+					this.wrapperStyle += 'height: ' + this.unit( this.image.height ) + 'rem;';
+				} else if( this.direction === '|' ) {
+					this.wrapperStyle += 'width: ' + this.unit( this.image.width ) + 'rem;';
+					this.wrapperStyle += 'height: ' + this.unit( this.image.height ) / this.steps + 'rem;';
+				}
+				this.wrapperStyle += 'position: absolute;-webkit-transform: translate3d(-50%, -50%, 0);text-align: center;left: 50%;top: 50%;overflow:hidden;';
+	
+				var spriteAnimationName = __webpack_require__(26)('sprite_');
+	
+				this.imgStyle = '';
+				this.imgStyle += 'width: auto;height: ' + this.unit( this.image.height ) + 'rem;overflow:hidden;';
+				this.imgStyle += '-webkit-animation: ' + spriteAnimationName + ' .4s steps(1) 0s infinite;animation: ' + spriteAnimationName + ' .4s steps(1) 0s infinite;';
+	
+				var spriteAnimationCss = __webpack_require__( 27 )( spriteAnimationName, this.steps, '-' );
+	
+				injectStyle( spriteAnimationCss );
+	
+				console.log( spriteAnimationName );
+			});
+	}, '{ }');
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 23 */
+/* 24 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 25 */,
+/* 26 */
+/***/ function(module, exports) {
+
+	module.exports = function( prefix ){
+		prefix = prefix || 'prefix';
+		return String(Math.random() + Math.random()).replace(/\d\.\d{4}/, prefix);
+	};
+
+
+/***/ },
+/* 27 */
+/***/ function(module, exports) {
+
+	module.exports = function( name, steps, direction ){
+		var cssContent = 'keyframes ' + name;
+		cssContent += '{';
+		var add = 100 / steps;
+		for( var i = 0; i <= steps; i++ ){
+			cssContent += ( i * add ) +  '% {';
+			if( direction === '-' ){
+				cssContent += '-webkit-transform: translate3d(-' + ( i * add ) + '%,0,0);'
+			} else if( direction === '|' ) {
+				cssContent += '-webkit-transform: translate3d(0,-' + ( i * add ) + '%,0);'
+			}
+			cssContent += '}';
+		}
+		cssContent += '}';
+	
+		return '@-webkit-' + cssContent + '@' + cssContent;
+	};
+
+
+/***/ },
+/* 28 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 	module.exports = {"circle":"scene-loading_circle_3ZB1Y","circle_small":"scene-loading_circle_small_3vl2H scene-loading_circle_3ZB1Y","circle_large":"scene-loading_circle_large_6GOwQ scene-loading_circle_3ZB1Y"};
 
 /***/ },
-/* 24 */,
-/* 25 */
+/* 29 */,
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "images/sheep.png?697bcb";
+	module.exports = {width: 4160,height: 160,src: __webpack_require__.p + "images/sheep.png?697bcb"}
 
 /***/ }
 /******/ ]);

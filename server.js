@@ -1,8 +1,9 @@
-var webpack = require('webpack');
+var webpack          = require('webpack');
 var webpackDevServer = require('webpack-dev-server');
-var config = require('./webpack.config.js');
+var baseConfig       = require('./webpack/base');
+var config           = require('./webpack.config.js');
 
-config.entry.unshift( 'webpack-dev-server/client?http://' + 'localhost' + ':' + '8080' );
+config.entry.unshift( 'webpack-dev-server/client?http://' + baseConfig.host + ':' + baseConfig.port );
 
 var compiler = webpack( config );
 var server = new webpackDevServer(compiler, {
@@ -16,9 +17,9 @@ var server = new webpackDevServer(compiler, {
 	headers: {
 		'Access-Control-Allow-Origin': '*'
 	},
-	publicPath: 'http://cdn.example.com/build'
+	publicPath: '//' + baseConfig.publicHost + ':' + baseConfig.publicPort + '/dist'
 });
 
-server.listen( 8080, 'localhost', function(){
-	console.log( 'listening on 8080...' );
+server.listen( baseConfig.port, baseConfig.host, function(){
+	console.log( 'listening on ' + baseConfig.port + '...' );
 } );

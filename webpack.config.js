@@ -1,9 +1,10 @@
-var ExtractTextPlugin  = require('extract-text-webpack-plugin');
-var HtmlWebpackPlugin  = require('html-webpack-plugin');
-var autoprefixer = require('autoprefixer');
-var webpack = require('webpack');
-var path    = require('path');
-var cwd     = process.cwd();
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var autoprefixer      = require('autoprefixer');
+var webpack           = require('webpack');
+var path              = require('path');
+var baseConfig        = require('./webpack/base');
+var cwd               = process.cwd();
 
 require('es6-promise').polyfill();
 
@@ -12,7 +13,7 @@ var webpackConfig = {
 	cache: false,
 	entry: [ 'lib/shake-reload.js', 'mixin/unit.js', './index.js' ],
 	output: {
-		publicPath: 'http://demo.com:8080/',
+		publicPath: '//' + baseConfig.host + ':' + baseConfig.port + '/',
 		path: path.resolve( cwd, 'dist' ),
 		filename: 'bundle.js'
 	},
