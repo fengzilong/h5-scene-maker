@@ -20,8 +20,16 @@ require('lib/animo.css')
 			var $root = $( this.root );
 
 			$root.animo({
-				animation: ['tada', 'bounceOutLeft'],
-				duration: 1
+				animation: ['flipInX'],
+				duration: 1,
+				keep: true
+			}, function(){
+				$root.animo({
+					animation: ['tada', 'bounceOutLeft'],
+					duration: 1
+				}, function(){
+
+				});
 			});
 		});
 	</script>

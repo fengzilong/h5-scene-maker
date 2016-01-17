@@ -7,18 +7,20 @@
     "riot": "^2.3.11"
   },
   "devDependencies": {
+    "autoprefixer": "^6.3.1",
+    "babel": "^6.3.13",
     "babel-core": "^6.3.15",
     "babel-loader": "^6.2.0",
-    "es6-promise": "^3.0.2",
-    "html-webpack-plugin": "^1.7.0",
-    "babel": "^6.3.13",
-    "webpack-dev-server": "^1.14.0",
-    "extract-text-webpack-plugin": "^0.9.1",
     "css-loader": "^0.23.0",
-    "riotjs-loader": "^1.2.0",
+    "es6-promise": "^3.0.2",
+    "extract-text-webpack-plugin": "^0.9.1",
+    "file-loader": "^0.8.5",
+    "html-webpack-plugin": "^1.7.0",
     "postcss-loader": "^0.8.0",
+    "riotjs-loader": "^1.2.0",
+    "style-loader": "^0.13.0",
     "webpack": "^1.12.9",
-    "style-loader": "^0.13.0"
+    "webpack-dev-server": "^1.14.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

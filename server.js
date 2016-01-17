@@ -7,6 +7,7 @@ config.entry.unshift( 'webpack-dev-server/client?http://' + 'localhost' + ':' + 
 var compiler = webpack( config );
 var server = new webpackDevServer(compiler, {
 	contentBase: './',
+	noInfo: true,
 	hot: false,
 	watchOptions: {
 		aggregateTimeout: 300,

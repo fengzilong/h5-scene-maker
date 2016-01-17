@@ -1,8 +1,6 @@
 <ui-element>
-	<div class="{ styles.center }">
-		<div name="offset">
-			<yield />
-		</div>
+	<div class="{ styles.center }" name="offset">
+		<yield />
 	</div>
 
 	<script>
@@ -37,6 +35,8 @@
 
 		this.on('mount', function(){
 			locate();
+			var $root = $(this.root)
+
 		});
 	</script>
 </ui-element>

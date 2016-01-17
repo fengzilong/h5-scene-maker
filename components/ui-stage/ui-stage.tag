@@ -8,7 +8,7 @@
 		this.tagName = 'ui-stage';
 
 		this.on('mount', function(){
-			console.log( 'ui-stage mounted' );
+			
 		});
 	</script>
 </ui-stage>
