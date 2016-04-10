@@ -3,12 +3,12 @@ var webpackDevServer = require('webpack-dev-server');
 var baseConfig       = require('./webpack/base');
 var config           = require('./webpack.config.js');
 
-config.entry.unshift( 'webpack-dev-server/client?http://' + baseConfig.host + ':' + baseConfig.port );
+// config.entry.unshift( 'webpack-dev-server/client?http://' + baseConfig.host + ':' + baseConfig.port );
 
 var compiler = webpack( config );
 var server = new webpackDevServer(compiler, {
 	contentBase: './',
-	noInfo: true,
+	noInfo: false,
 	hot: false,
 	watchOptions: {
 		aggregateTimeout: 300,
@@ -17,7 +17,7 @@ var server = new webpackDevServer(compiler, {
 	headers: {
 		'Access-Control-Allow-Origin': '*'
 	},
-	publicPath: '//' + baseConfig.publicHost + ':' + baseConfig.publicPort + '/dist'
+	publicPath: '//' + baseConfig.publicHost + ':' + baseConfig.publicPort + '/dist/'
 });
 
 server.listen( baseConfig.port, baseConfig.host, function(){

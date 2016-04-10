@@ -10,24 +10,35 @@ require('es6-promise').polyfill();
 
 var webpackConfig = {
 	devtool: 'source-map',
-	cache: false,
-	entry: [ 'lib/shake-reload.js', 'mixin/unit.js', './index.js' ],
+	context: cwd,
+	entry: {
+		common: [
+			'es6-promise',
+			'./src/zepto.js',
+			'./src/animo.js',
+			'./src/riot',
+			'./src/shake.js',
+		],
+		app: [
+			'./src/animo.css',
+			'./src/index.js',
+		],
+	},
 	output: {
-		publicPath: '//' + baseConfig.host + ':' + baseConfig.port + '/',
+		publicPath: '//' + baseConfig.host + ':' + baseConfig.port + '/dist/',
 		path: path.resolve( cwd, 'dist' ),
-		filename: 'bundle.js'
+		filename: '[name].js',
+		chunkFilename: '[name]-[chunkhash:8].js',
 	},
 	resolve: {
 		alias: {
-			ui: path.resolve( cwd, 'components' ),
-			css: path.resolve( cwd, 'css' ),
-			image: path.resolve( cwd, 'images' ),
-			scene: path.resolve( cwd, 'scenes' ),
-			lib: path.resolve( cwd, 'lib' ),
-			mixin: path.resolve( cwd, 'mixins' )
+			image: path.resolve( cwd, 'src/assets/images' ),
+			view: path.resolve( cwd, 'src/views' ),
+			util: path.resolve( cwd, 'src/util' ),
+			ui: path.resolve( cwd, 'src/components' ),
 		},
 		extensions: [
-			'', '.js', '.tag', '.css'
+			'', '.js', '.tag', '.less', '.css'
 		]
 	},
 	module: {
@@ -41,14 +52,20 @@ var webpackConfig = {
 		],
 		loaders: [
 			{
-				test: /\.css$/,
+				test: /\.(js|tag)$/,
 				exclude: /node_modules/,
-				loader: ExtractTextPlugin.extract('style-loader', 'css-loader?localIdentName=[name]_[local]_[hash:base64:5]!postcss-loader')
+				loader: 'babel-loader'
 			},
 			{
-				test: /\.jpg|\.png/,
+				test: /\.(less|css)$/,
 				exclude: /node_modules/,
-				loader: 'image-loader?limit=10000&name=[path][name].[ext]?[hash:6]'
+				loader: ExtractTextPlugin.extract('style-loader', 'css-loader?localIdentName=[name]_[local]_[hash:base64:5]!postcss-loader!less-loader')
+			},
+			// TODO: include .js, url-loader for images in css
+			{
+				test: /\.(jpeg|jpg|png|gif)$/,
+				exclude: /node_modules/,
+				loader: 'image-loader?limit=10000&name=images/[path][name].[ext]?[hash:8]&context=' + path.resolve( cwd, 'src/assets/images' )
 			}
 		]
 	},
@@ -56,14 +73,11 @@ var webpackConfig = {
 		return [ autoprefixer ];
 	},
 	plugins: [
-		new ExtractTextPlugin( 'bundle.css'),
 		new webpack.DefinePlugin({
-			DEV: true
+			__DEV__: true
 		}),
-		new webpack.ProvidePlugin({
-			riot: 'riot',
-			Promise: 'lib/promise-polyfill'
-		})
+		// new webpack.ProvidePlugin({}),
+		new ExtractTextPlugin( 'app.css'),
 	]
 };
 
